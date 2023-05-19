@@ -1,0 +1,78 @@
+<div class="mat-elevation-z8" *ngIf="service.dataSource.data">
+  <mat-toolbar color="primary">Lista de titulares</mat-toolbar>
+  <table mat-table [dataSource]="service.dataSource.data">
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> <b>ID</b> </th>
+      <td mat-cell *matCellDef="let element"><b> {{element.id}}</b> </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="nome">
+      <th mat-header-cell *matHeaderCellDef> <b>Nome</b> </th>
+      <td mat-cell *matCellDef="let element"> {{element.nome}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="cpf">
+      <th mat-header-cell *matHeaderCellDef> <b>CPF</b> </th>
+      <td mat-cell *matCellDef="let element" minlength="11" maxlength="11"> {{element.cpf | cpf}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="agencia">
+      <th mat-header-cell *matHeaderCellDef><b> Agencia</b> </th>
+      <td mat-cell *matCellDef="let element"> {{element.conta.agencia}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="conta">
+      <th mat-header-cell *matHeaderCellDef> <b>Conta</b> </th>
+      <td mat-cell *matCellDef="let element"> {{element.conta.numero}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="saldo">
+      <th mat-header-cell *matHeaderCellDef> <b>Saldo</b> </th>
+      <td mat-cell *matCellDef="let element"> <b>{{element.conta.saldo ?? 0 | currency:'BRL':'symbol':'1.2-2'}}</b> </td>
+    </ng-container>
+
+     <!-- Actions Column -->
+     <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef>
+        <button mat-icon-button color="accent"  (click)="onAdd()" aria-label="Adicionar um titular" title="Adicionar um titular">
+          <mat-icon>add</mat-icon>
+        </button>
+      </mat-header-cell>
+
+      <mat-cell *matCellDef="let element">
+
+        <button mat-icon-button color="primary" (click)="onEdit(element)" aria-label="Editar titular" title="Editar titular">
+          <mat-icon >edit</mat-icon>
+        </button>
+
+        <button mat-icon-button color="warn" (click)="openDialog(element)" aria-label="Deletar um titular" title="Deletar um titular">
+          <mat-icon>delete</mat-icon>
+        </button>
+
+        <button mat-icon-button class="green" (click)="onTransfer(element)" aria-label="Transferir Valores" title="Transferir Valores">
+          <mat-icon >compare_arrows</mat-icon>
+        </button>
+
+        <button mat-icon-button class="blue" (click)="onExtract(element)" aria-label="Extrato bancário" title="Extrato bancário">
+          <mat-icon >person</mat-icon>
+        </button>
+
+      </mat-cell>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="service.displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: service.displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                 showFirstLastButtons
+                 aria-label="Select page of periodic elements">
+  </mat-paginator>
+</div>
+
+

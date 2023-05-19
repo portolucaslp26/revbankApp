@@ -1,0 +1,11 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 94vh;
+  background-color: rgb(190, 190, 190);
+}
+
+.mat-elevation-z8 {
+  width: 90%;
+}

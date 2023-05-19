@@ -1,0 +1,49 @@
+<mat-card style="width: 60%">
+  <form #form="ngForm"></form>
+  <mat-card-header>
+    <mat-card-title>Transferência de valores</mat-card-title>
+    <mat-card-subtitle>Selecione a conta de destino e o valor da transferência</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content class="d-flex flex-column">
+    <div class="d-flex">
+      <mat-form-field style="margin: 10px 10px 10px 0; width: 49%;">
+        <mat-label>Conta de origem</mat-label>
+        <mat-select [(ngModel)]="contaOrigem" name="contaOrigem" #contaOrigemModel="ngModel" required>
+          <mat-option [attr.disabled]="true" [value]="titular?.conta?.id" name="contaOrigem">
+            {{titular?.conta?.numero}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="contaOrigemModel.invalid && (contaOrigemModel.dirty || contaOrigemModel.touched)">
+          O número da conta de origem é <strong>obrigatório</strong>
+        </mat-error>
+      </mat-form-field>
+
+
+      <mat-form-field style="width: 49%;">
+        <mat-label>Conta de destino</mat-label>
+        <mat-select [(ngModel)]="contaDestino" name="contaDestino" required #contaDestinoModel="ngModel">
+          <mat-option *ngFor="let titular of titularesFiltrados" [value]="titular.conta.id">
+            {{titular.conta.numero}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="contaDestinoModel.invalid && (contaDestinoModel.dirty || contaDestinoModel.touched)">
+          O número da conta de destino é <strong>obrigatório</strong>
+        </mat-error>
+      </mat-form-field>
+
+
+    </div>
+
+    <mat-form-field style="width: 100%;">
+      <mat-label>Valor</mat-label>
+      <input matInput placeholder="Valor da transferência" [(ngModel)]="valor" name="valor" required>
+      <mat-error *ngIf="!valor">O valor da transferência é obrigatório</mat-error>
+    </mat-form-field>
+
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" style="margin-right: 10px" (click)="onTransferir()">Transferir</button>
+    <button mat-button>Cancelar</button>
+  </mat-card-actions>
+
+</mat-card>

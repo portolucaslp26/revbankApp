@@ -1,0 +1,42 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 94vh;
+  background-color: rgb(190, 190, 190);
+}
+
+.mat-mdc-row .mat-mdc-cell {
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+  cursor: pointer;
+}
+
+.mat-mdc-row:hover .mat-mdc-cell {
+  border-color: #673AB7;
+  background-color: #e3d7fa;
+}
+
+.demo-row-is-clicked {
+  font-weight: bold;
+}
+
+.mat-elevation-z8 {
+  width: 90%;
+}
+
+mat-header-cell {
+  padding-bottom: 10px;
+}
+
+mat-cell {
+  padding-bottom: 3px;
+}
+
+.green {
+  color: #4fb73a
+}
+
+.blue {
+  color: #098dda
+}
