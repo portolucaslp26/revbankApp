@@ -54,4 +54,8 @@ export class TrasferenciaComponent implements OnInit {
       })
     }
   }
+
+  onCancel() {
+    this.router.navigate(['/titulares'])
+  }
 }
