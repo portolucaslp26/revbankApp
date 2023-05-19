@@ -41,13 +41,13 @@ export class TrasferenciaComponent implements OnInit {
   }
 
   onTransferir() {
+    if (this.valor > this.titular.conta.saldo) {
+      this.snackBar.open('Saldo insuficiente!', 'Ok', {
+        duration: 3000
+      })
+      return
+    }
     if (this.contaDestino && this.valor && this.contaOrigem) {
-      if (this.valor > this.titular.saldo) {
-        this.snackBar.open('Saldo insuficiente!', 'Ok', {
-          duration: 3000
-        })
-        return
-      }
       this.service.transferir(this.contaOrigem, this.contaDestino, this.valor).subscribe((res: any) => {
       })
       this.router.navigate(['/titulares'])
